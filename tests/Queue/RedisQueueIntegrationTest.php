@@ -77,6 +77,7 @@ class RedisQueueIntegrationTest extends TestCase
 
     /**
      * @dataProvider redisDriverProvider
+     *
      * @requires extension pcntl
      *
      * @param  mixed  $driver
@@ -85,10 +86,6 @@ class RedisQueueIntegrationTest extends TestCase
      */
     public function testBlockingPop($driver)
     {
-        if (! function_exists('pcntl_fork')) {
-            $this->markTestSkipped('Skipping since the pcntl extension is not available');
-        }
-
         $this->tearDownRedis();
 
         if ($pid = pcntl_fork() > 0) {
